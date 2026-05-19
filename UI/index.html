@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Chat | AI Assistant</title>
+    <meta name="description" content="Premium RAG-based AI assistant interface">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-logo">
+                <i class="fa-solid fa-brain glow-icon"></i>
+                <h1>Nexus RAG</h1>
+            </div>
+            <div class="header-status">
+                <span class="status-indicator"></span>
+                <span>System Online</span>
+            </div>
+        </header>
+
+        <main class="chat-container">
+            <div id="chat-history" class="chat-history">
+                <div class="message system-message initial-message">
+                    <div class="message-avatar">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>Welcome to Nexus RAG. How can I assist you with your documentation today?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <form id="chat-form" class="chat-form">
+                    <input type="text" id="user-input" placeholder="Ask a question..." autocomplete="off" required>
+                    <button type="submit" id="send-button" class="send-btn">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
