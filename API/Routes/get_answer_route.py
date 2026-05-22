@@ -1,6 +1,7 @@
 import logging
 from typing import Any, Dict
 
+from Guardrails.input_guardrails import InputGuardrails
 from fastapi import (
     APIRouter,
     HTTPException,
@@ -46,6 +47,7 @@ rag_service = RAGService(
     collection_name="test_collection",
     top_k=5,
 )
+input_guardrail = InputGuardrails()
 
 
 # ------------------------------------------------------------------------------
@@ -130,15 +132,27 @@ async def get_answer_route(
             client_host,
         )
 
-        response = await rag_service.get_answer(
-            query=query_payload.query
+        input_query = query_payload.query
+        clean_query, guardrail_triggered = input_guardrail.run_input_guardrails(
+            input_query
         )
+
+        answer = clean_query
+        if not guardrail_triggered:
+
+            # ---------------------------------------------------
+            # Generate Answer
+            # ---------------------------------------------------
+            answer = await rag_service.get_answer(
+                query=clean_query,
+                top_k=5,
+            )
 
         logger.info(
             "QA request completed successfully"
         )
 
-        return response
+        return answer
 
     except RetrievalError as exc:
 
