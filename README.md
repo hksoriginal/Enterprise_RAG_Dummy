@@ -57,6 +57,12 @@ Then open the API in your browser or send requests to:
 - `POST /retrieval` - Search the vector store for relevant context.
 - `POST /get-answer` - Execute the full RAG pipeline and generate an answer.
 
+## Semantic Caching
+
+- The RAG endpoint now stores generated answers in a semantic query cache collection.
+- If a new query is sufficiently similar to a cached query, the cached answer is returned immediately.
+- The cache is stored in an additional ChromaDB collection named `<collection_name>_query_cache`.
+
 ## Notes
 
 - The app uses a local `Embedding_Model/` folder for embeddings and a Chroma SQLite store in `Database/`.
