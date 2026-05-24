@@ -1,4 +1,9 @@
 # Production RAG API
+<img width="1107" height="840" alt="ENt_RAG" src="https://github.com/user-attachments/assets/9ea2dcaa-30d1-4492-91be-53782db56aa2" />
+
+# Telegram Snapshot
+<img width="738" height="1600" alt="WhatsApp Image 2026-05-24 at 9 16 20 PM" src="https://github.com/user-attachments/assets/3acba5f2-d3fb-409c-b67c-87051af2d784" />
+
 
 A production-style Retrieval-Augmented Generation (RAG) API built with FastAPI. This repository includes ingestion, retrieval, and answer generation routes backed by a local Chroma vector store and an OpenRouter-powered LLM.
 
