@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import os
 import sys
@@ -10,6 +11,8 @@ from typing import AsyncGenerator
 
 import uvicorn
 from fastapi import FastAPI
+
+from UI.TelegramBot import telegram_bot
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
@@ -55,7 +58,7 @@ HOST = os.getenv(
 PORT = int(
     os.getenv(
         "PORT",
-        8000,
+        8100,
     )
 )
 
@@ -88,6 +91,10 @@ async def lifespan(
         # Startup Logic
         # ----------------------------------------------------------------------
 
+        app.state.telegram_bot_task = await telegram_bot.start_telegram_bot()
+        if app.state.telegram_bot_task is None:
+            logger.warning("Telegram bot was not started")
+
         logger.info("Application startup completed")
 
         yield
@@ -102,6 +109,9 @@ async def lifespan(
         # ----------------------------------------------------------------------
         # Shutdown Logic
         # ----------------------------------------------------------------------
+
+        if getattr(app.state, "telegram_bot_task", None) is not None:
+            await telegram_bot.stop_telegram_bot(app.state.telegram_bot_task)
 
         logger.info("Shutting down application")
 
@@ -205,10 +215,9 @@ if __name__ == "__main__":
     )
 
     uvicorn.run(
-        "main:app",
+        app,
         host=HOST,
         port=PORT,
         reload=DEBUG,
-        workers=1 if DEBUG else 4,
         log_level="info",
     )

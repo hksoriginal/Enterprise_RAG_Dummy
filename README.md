@@ -34,9 +34,12 @@ OPEN_ROUTER_KEY=your_openrouter_api_key
 APP_NAME=production-rag-api
 APP_VERSION=1.0.0
 HOST=0.0.0.0
-PORT=8000
+PORT=8100
 DEBUG=true
+TELEGRAM_BOT_TOKEN=your_telegram_bot_token
 ```
+
+`TELEGRAM_BOT_TOKEN` is optional. If it is set, the bot will start automatically when `python API/main.py` is run.
 
 ## Running the API
 
@@ -48,8 +51,14 @@ python API/main.py
 
 Then open the API in your browser or send requests to:
 
-- `http://localhost:8000/`
-- `http://localhost:8000/docs` for the FastAPI interactive docs
+- `http://localhost:8100/`
+- `http://localhost:8100/docs` for the FastAPI interactive docs
+
+## Telegram Bot
+
+If `TELEGRAM_BOT_TOKEN` is set in `.env`, the Telegram bot will start alongside the backend when `python API/main.py` is executed. The bot uses the same RAG service and query pipeline as the API.
+
+To stop the application, press `Ctrl+C` in the terminal. The backend and Telegram polling process are both shut down cleanly.
 
 ## Available Routes
 

@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+.venv/
+venv/
+
+# Git
+.git
+
+# Local env files
+.env
+
+# Database and large model files (optional: include if you want them in the image)
+Database/
+Embedding_Model/onnx/
+Embedding_Model/openvino/
+Embedding_Model/*/model_*.onnx
+
+# VSCode
+.vscode/
+
+# Docker
+Dockerfile

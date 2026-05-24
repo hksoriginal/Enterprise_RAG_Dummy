@@ -144,7 +144,8 @@ class InputGuardrails(LLMService):
             return False
 
         except Exception as error:
-            logger.exception(f"Error during malicious content detection: {error}")
+            logger.exception(
+                f"Error during malicious content detection: {error}")
             raise
 
     def fallback_response(self) -> str:
@@ -219,7 +220,8 @@ class InputGuardrails(LLMService):
                 email = match.group()
                 username, domain = email.split("@")
 
-                masked_username = username[:2] + "*" * max(len(username) - 2, 0)
+                masked_username = username[:2] + \
+                    "*" * max(len(username) - 2, 0)
 
                 return masked_username + "@" + domain
 
